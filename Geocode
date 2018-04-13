@@ -1,0 +1,12 @@
+library(ggmap)
+library(dplyr)
+
+x1 <-geocode( c("Haunspergstrasse 88, 5020 Salzburg","Kapitelgasse 4, 5020 Salzburg","Hellbrunnerstrasse 34, 5020 Salzburg"))
+geocodeQueryCheck(userType = "free") # so you can use geocode about 2500 times a day
+route_df <- route("Haunspergstrasse 88 5020 Salzburg","Hellbrunnerstrasse 34 5020 Salzburg", mode = "bicycling", 
+                  structure = "route", alternatives = TRUE)
+routeQueryCheck()
+get_map("Salzburg", zoom = 13,scale = 1)%>% ggmap() + 
+    geom_point(data=x1,aes(x=lon, y=lat),color = 'red', size = 3) +
+    geom_line(data=x1,aes(x=lon, y=lat),color = 'blue')+
+    geom_path(data = route_df, aes(x=lon,y=lat), color = "green", size = 1.5,  lineend = "round")
