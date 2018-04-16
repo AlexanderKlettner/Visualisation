@@ -6,7 +6,11 @@ geocodeQueryCheck(userType = "free") # so you can use geocode about 2500 times a
 route_df <- route("Haunspergstrasse 88 5020 Salzburg","Hellbrunnerstrasse 34 5020 Salzburg", mode = "bicycling", 
                   structure = "route", alternatives = TRUE)
 routeQueryCheck()
-get_map("Salzburg", zoom = 13,scale = 1)%>% ggmap() + 
+Salzburg <- get_map("Salzburg", zoom = 13,scale = 1)
+geocodeQueryCheck(userType = "free")
+ggmap(Salzburg) + 
     geom_point(data=x1,aes(x=lon, y=lat),color = 'red', size = 3) +
     geom_line(data=x1,aes(x=lon, y=lat),color = 'blue')+
-    geom_path(data = route_df, aes(x=lon,y=lat), color = "green", size = 1.5,  lineend = "round")
+    geom_path(data = route_df, aes(x=lon,y=lat), color = "green", size = 1.5,  lineend = "round")+
+    scale_x_continuous(limits = c(13.02,13.07), expand = c(0,0))+
+    scale_y_continuous(limits = c(47.76,47.83), expand = c(0,0))
