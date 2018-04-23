@@ -1,0 +1,146 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{Warsaw}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+
+\usepackage{makeidx}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{paralist}
+
+\title{ggmap}
+\author{Jan Geissbauer \& Alexander Klettner}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+
+\frametitle{What can you do with R's ggmap Package?}
+
+\begin{itemize}
+
+\item
+\textbf{You can easily handle spatial data.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{ Why is it so easy to handle spatial data with ggmap?}
+
+\begin{itemize}
+
+\item
+\textbf{The Syntax is really intuitive.}
+
+\item
+If you have already some experience with R's ggplot2, you won't have to learn a lot of new things.
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The basic things to do:}
+
+Basically, there are two things you have to do:
+\bigskip
+
+1.) Get a map
+
+\bigskip
+
+2.) Plot it via ggmap
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Let's have a look at how we can do this!}
+
+get$\_$map(\textbf{location, zoom, scale, maptype, source}, force, messaging, urlonly, filename, crop, color, language, api$\_ $key)
+
+\bigskip
+
+ggmap(\textbf{ggmap}, extent, \textbf{base$\_$layer}, maprange, legend, padding, darken, ...)
+
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Examples}
+\includegraphics[width=1.1\textwidth]{Beispiele}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{combination of get$\_$map \& ggmap:}
+
+qmplot(\textbf{longitude, latitude, data, zoom, source, maptype}, extent, legend, padding, darken, ...)
+
+\bigskip
+
+\includegraphics[width=0.8\textwidth]{qmplot}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Exercise 1:} 
+
+Before you start, install ggmap! (and check dplyr)
+
+\bigskip
+Use the dataset \glqq crime \grqq, which is already in the package ggmap, to plot the different types of offenses in different colors on the map of houston.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{useful functions 1:}
+
+geocode(\textbf{location}, output,
+  source,...)
+
+revgeocode(\textbf{location}, output, ...)
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Examples:}
+
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{useful functions 2:}
+
+route(\textbf{from, to, mode},
+  structure, output,
+  alternatives,...)
+  
+\bigskip
+
+mapdist(\textbf{from, to, mode},
+  output, ...)
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Examples:}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Exercise 2:}
+
+
+\end{frame}
+\end{document}
