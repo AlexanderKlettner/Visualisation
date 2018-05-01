@@ -1,31 +1,19 @@
 library(ggmap)
 library(dplyr)
 
-address <- url("http://www.trutschnig.net/RTR2015.RData")
-load(address)
-head(RTR2015)
-str(RTR2015)
 
 #geocode
-x1 = geocode( c("Haunspergstrasse 88, 5020 Salzburg","Kapitelgasse 4, 5020 Salzburg","Hellbrunnerstrasse 34, 5020 Salzburg")) #geocode (Location)
+x1 = geocode(c("Kapitelgasse 4, 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg"), output = "latlona")
 geocodeQueryCheck(userType = "free") # so you can use geocode about 2500 times a day
 
 #revgeocode, geocode reverse
-x1Num_Kapit4 = as.numeric(x1[3,])
+x1Num_Kapit4 = as.numeric(x1[1,])
 revgeocode(x1Num_Kapit4)
 
 #route
-route_df <- route("Haunspergstrasse 88 5020 Salzburg","Hellbrunnerstrasse 34 5020 Salzburg", mode = "bicycling", 
-                  structure = "route", alternatives = TRUE)
+route_df <- route("Kapitelgasse 4, 5020 Salzburg","Hellbrunnerstrasse 34, 5020 Salzburg", mode = "bicycling", 
+                  structure = "route", alternatives = FALSE)
 routeQueryCheck()
-
-#distance, duration
-from <- c("Haunspergstrasse 88 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg")
-to <- c("Haunspergstrasse 88, 5020 Salzburg", "Kapitelgasse 4, 5020 Salzburg")
-
-mapdist("Haunspergstrasse 88 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg")
-mapdist(from, to)
-distQueryCheck()
 
 
 #get Salzburg
@@ -35,14 +23,30 @@ geocodeQueryCheck(userType = "free")
 #mapping
 p = ggmap(Salzburg, extent = "panel") + #Salzburg = Objekt from get_map
       geom_point(data=x1,aes(x=lon, y=lat),color = 'red', size = 3) +
-      geom_line(data=x1,aes(x=lon, y=lat),color = 'blue')+
-      geom_path(data = route_df, aes(x=lon,y=lat), color = "green", size = 1,  lineend = "round")+
-      scale_x_continuous(limits = c(13.02,13.07), expand = c(0,0))+
-      scale_y_continuous(limits = c(47.78,47.83), expand = c(0,0))
+      geom_line(data=x1,aes(x=lon, y=lat),color = 'blue', size = 1.4)+
+      scale_x_continuous(limits = c(13.045,13.065), expand = c(0,0))+
+      scale_y_continuous(limits = c(47.785,47.8), expand = c(0,0))
 p
 
-#ggmap Erklärung.......
-#qmplot Erklärung.........
+p1 = ggmap(Salzburg, extent = "panel") +
+      geom_path(data = route_df, aes(x=lon,y=lat), color = "green", size = 1.8,  lineend = "round")+
+      scale_x_continuous(limits = c(13.045,13.065), expand = c(0,0))+
+      scale_y_continuous(limits = c(47.785,47.8), expand = c(0,0))
+p1
+
+
+#distance, duration
+mapdist("Kapitelgasse 2, 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg")
+
+from <- c("Hauptbahnhof, 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg")
+to <- c("Mirabellplatz, 5020 Salzburg", "Kapitelgasse 4, 5020 Salzburg")
+mapdist(from, to)
+
+distQueryCheck()
+
+
+#ggmap ErklÃ¤rung.......
+#qmplot ErklÃ¤rung.........
 
 
 
@@ -60,13 +64,17 @@ library(leaflet)
 orte = c("Haunspergstrasse 88, 5020 Salzburg","Kapitelgasse 4, 5020 Salzburg","Hellbrunnerstrasse 34, 5020 Salzburg")
 df = data.frame(orte, x1)
 
+address <- url("http://www.trutschnig.net/RTR2015.RData")
+load(address)
+head(RTR2015)
+str(RTR2015)
 new_df = RTR2015[sample(nrow(RTR2015), 1000), ]
 
 leaflet(x1) %>% addTiles() %>% addMarkers()
 leaflet(df) %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = df$lon, lat = df$lat, popup=df$orte)
 leaflet(new_df) %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = new_df$longitude, lat = new_df$latitude, popup=paste0(new_df$device, " - ", new_df$op_name))
  
-#Kartentypen für addProviderTiles
+#Kartentypen fÃ¼r addProviderTiles
 #http://leaflet-extras.github.io/leaflet-providers/preview/
 
 
