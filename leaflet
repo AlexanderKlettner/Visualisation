@@ -1,0 +1,23 @@
+library(dplyr)
+library(leaflet)
+
+address <- url("http://www.trutschnig.net/RTR2015.RData")
+load(address)
+head(RTR2015)
+RTR_new <- RTR2015[sample(nrow(RTR2015), 1000), ]
+View(RTR_new)
+
+factpal <- colorFactor(c("magenta", "blue", "pink"), RTR_new$nw_cat)
+map <- RTR_new %>% leaflet() %>% 
+        addCircleMarkers(lng=RTR_new$longitude, lat=RTR_new$latitude,radius = 4, color=factpal(RTR_new$nw_cat), stroke = F,fillOpacity = 1,popup=paste0(new_df$device, " - ", new_df$op_name) ) %>%  
+        addTiles() %>% 
+        addLegend("bottomright", pal = factpal, values = RTR_new$nw_cat, opacity = 1)
+map
+
+
+########################################################################
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+m
