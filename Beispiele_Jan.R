@@ -76,9 +76,3 @@ leaflet(new_df) %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(
  
 #Kartentypen für addProviderTiles
 #http://leaflet-extras.github.io/leaflet-providers/preview/
-
-
-install.packages("mapview", dependencies= TRUE)
-library(mapview)
-mapview(x1)
-
