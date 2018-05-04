@@ -129,8 +129,7 @@ map <- leaflet() %>%
 map
 
 # Alternative option
-leaflet() %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = df$lon, lat = df$lat, popup=df$orte)
-leaflet(new_df) %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = new_df$longitude, lat = new_df$latitude, popup=paste0(new_df$device, " - ", new_df$op_name))
+leaflet() %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = new_df$longitude, lat = new_df$latitude, popup = paste0("Device: ", new_df$device, " - Operator: ", new_df$op_name, " - Plattform: ", new_df$device_platform))
 
 #Kartentypen für addProviderTiles
 #http://leaflet-extras.github.io/leaflet-providers/preview/
