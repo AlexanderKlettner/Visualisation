@@ -31,6 +31,8 @@ qmplot(longitude, latitude, data = new_df, zoom = 6,
 
 
 #============Exercise 1, Solution============
+crime = crime[sample(nrow(crime), 1000), ]
+
 geocodeQueryCheck(userType = "free")
 houston <- get_map(location = "Houston", zoom = 10, scale = 2, source = "google", maptype = "roadmap")
 
@@ -41,7 +43,7 @@ ggmap(houston, base_layer = ggplot(data = crime, aes(x = lon, y = lat, color = o
 #geocode
 geocodeQueryCheck(userType = "free")
 x1 = geocode(c("Kapitelgasse 4, 5020 Salzburg", "Hellbrunnerstrasse 34, 5020 Salzburg"), output = "latlona")
-
+x1
 
 #revgeocode, geocode reverse
 x1Num_Kapit4 = as.numeric(x1[1,1:2])
