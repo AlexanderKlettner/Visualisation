@@ -1,5 +1,4 @@
 #load packages
-library(ggplot2)
 library(ggmap)
 library(dplyr)
 
@@ -131,5 +130,5 @@ map
 leaflet() %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = df$lon, lat = df$lat, popup=df$orte)
 leaflet(new_df) %>% addProviderTiles(providers$OpenStreetMap.DE) %>% addMarkers(lng = new_df$longitude, lat = new_df$latitude, popup=paste0(new_df$device, " - ", new_df$op_name))
 
-#Kartentypen für addProviderTiles
+#Kartentypen fÃ¼r addProviderTiles
 #http://leaflet-extras.github.io/leaflet-providers/preview/
