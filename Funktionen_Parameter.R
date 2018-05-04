@@ -1,10 +1,10 @@
 
 #Drei Wege location zu spezifizieren:
 #1 center of the map "c(lon=14, lat = 47.5)"
-get_map(c(lon=14, lat = 47.5),zoom = 6, scale = 1, maptype = "terrain") #÷sterreich
+get_map(c(lon=14, lat = 47.5),zoom = 6, scale = 1, maptype = "terrain") #√ñsterreich
 
 #2 name of location
-geocode("the white house") #lon/lat f¸r das weiﬂe Haus
+geocode("the white house") #lon/lat f√ºr das wei√üe Haus
 get_map(location = "Salzburg", zoom = 13, scale = 2)
 
 #Unter-/Obergrenze der Karte
@@ -43,11 +43,3 @@ ggmap(k1)
 #legend
 #padding
 #darken
-
-
-ggplot(aes(x=lon, y=lat), data=fourCorners) +
-  geom_blank() + coord_map("mercator") +
-  annotation_raster(ggmap,
-                    xmin, xmax, ymin, ymax)
-
-
